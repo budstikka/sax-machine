@@ -2,7 +2,7 @@ module SAXMachine
   class SAXConfig
     
     class ElementConfig
-      attr_reader :name, :setter, :data_class, :collection
+      attr_reader :name, :setter, :data_class, :collection, :return_class
       
       def initialize(name, options)
         @name = name.to_s
@@ -30,6 +30,7 @@ module SAXMachine
         end
         @data_class = options[:class]
         @required = options[:required]
+        @return_class = options[:return]
       end
 
       def column

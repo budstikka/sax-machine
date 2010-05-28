@@ -74,6 +74,26 @@ describe "SAXMachine" do
         document.title.should == "My Title"
       end
 
+      it "should return Integer when :return => Integer option exists" do
+        @klass = Class.new do
+          include SAXMachine
+          element :count, :return => Integer
+        end
+        document = @klass.new
+        document.parse("<count>10</count>")
+        document.count.should == 10
+      end
+
+      it "should return DateTime when :return => DateTime option exists" do
+        @klass = Class.new do
+          include SAXMachine
+          element :date, :return => DateTime
+        end
+        document = @klass.new
+        document.parse("<date>2010-05-28T01:23:45+09:00</date>")
+        document.date.should be_an_instance_of(DateTime)
+      end
+
       it "should save cdata into an accessor" do
         document = @klass.parse("<title><![CDATA[A Title]]></title>")
         document.title.should == "A Title"

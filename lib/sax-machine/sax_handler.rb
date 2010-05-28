@@ -1,4 +1,5 @@
 require "nokogiri"
+require 'date'
 
 module SAXMachine
   class SAXHandler < Nokogiri::XML::SAX::Document
@@ -47,7 +48,8 @@ module SAXMachine
         if config.respond_to?(:accessor)
           object.send(config.accessor) << element
         else
-          value = config.data_class ? element : value
+          value = create_value(value, element, config)
+#          value = config.data_class ? element : value
           object.send(config.setter, value) unless value == ""
           mark_as_parsed(object, config)
         end
@@ -61,6 +63,21 @@ module SAXMachine
 
     def parsed_config?(object, element_config)
       @parsed_configs[[object.object_id, element_config.object_id]]
+    end
+
+  protected
+    def create_value(value, element, config)
+      if config.data_class
+        element
+      elsif config && config.return_class == Integer
+        value.to_i
+      elsif config && config.return_class == Float
+        value.to_f
+      elsif config && config.return_class == DateTime
+        DateTime.parse(value)
+      else
+        value
+      end
     end
   end
 end

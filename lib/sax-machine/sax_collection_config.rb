@@ -31,7 +31,11 @@ module SAXMachine
 
       def data_class
         @class || @name
-      end      
+      end
+
+      def return_class
+        nil
+      end
       
     protected
       
