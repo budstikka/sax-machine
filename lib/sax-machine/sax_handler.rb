@@ -30,7 +30,7 @@ module SAXMachine
         end
         sax_config.element_configs_for_attribute(name, attrs).each do |ec|
           unless parsed_config?(object, ec)
-            object.send(ec.setter, ec.value_from_attrs(attrs))
+            object.send(ec.setter, create_value(ec.value_from_attrs(attrs), nil, sax_config.element_config_for_tag(name, attrs)))
             mark_as_parsed(object, ec)
           end
         end
