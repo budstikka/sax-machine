@@ -2,12 +2,12 @@
 
 Gem::Specification.new do |s|
   s.name = %q{sax-machine}
-  s.version = "0.0.15.1"
+  s.version = "0.0.15.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Paul Dix", "udzura kondo"]
-  s.date = %q{2010-05-28}
-  s.email = %q{udzura@udzura.jp}
+  s.authors = ["Paul Dix", "udzura kondo", "Peter Haza"]
+  s.date = %q{2010-09-16}
+  s.email = %q{ph@budstikka.no}
   s.files = [
     "lib/sax-machine.rb",
     "lib/sax-machine/sax_config.rb",
